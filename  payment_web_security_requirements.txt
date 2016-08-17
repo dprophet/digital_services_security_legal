@@ -1,0 +1,189 @@
+- To ensure segregation of authentication data and PAN data, the 
+authentication data and the PAN must be transmitted in separate sessions 
+from the consumer’s browser and the merchant to the authenticating 
+vendor.
+
+- To ensure privacy of the payment instrument, the transmission of the 
+PAN must be in a separate browser session than the merchant checkout 
+process. The Merchant must not be exposed to the users payment 
+instrument details.
+
+- The authentication data shall be secured and processed separately from 
+other sensitive consumer data until it is encrypted in an HSM or other 
+SCD.
+
+- The merchant shopping and payment must be in separate browser 
+sessions. Acceptable methods below using internet redirection.
+
+- Encryption key storage requirements – The keys should be securely 
+stored, and more specifically encrypted using tamper-resistant hardware 
+encryption, using them only when required.
+
+- Consumer authentication data shall be subject to a limited number of 
+invalid verification attempts before rendering it unavailable for a 
+temporary period of time.
+
+- Encryption key only for consumer authentication data (i.e. not 
+overloaded use for other data)
+- Encryption key rotation / replacement requirements
+- Encryption key storage requirements – The keys should be securely 
+stored, and more specifically encrypted using tamper-resistant hardware 
+encryption, using them only when required.
+- Protection from intercepting authentication data entry (e.g. keyboard 
+logging).
+- Requirement to separate identification data ("what you have") from 
+consumer authentication data ("what you know"), across the enterprise 
+and across disparate networks participating in a given transaction. This 
+includes transmission, storage or display.
+- Ensure no clear-text, unencrypted consumer authentication data should 
+be transmitted across any network.
+- Compromise of authentication data for one user SHALL not compromise 
+the authentication data for another user.
+- Parties that issue authentication credentials vs. parties that capture 
+or pass the credentials should be separated.  For those that capture or 
+pass the credentials, authentication data shall never be stored 
+post-authentication
+- Consumer authentication data shall be subject to a limited number of 
+invalid verification attempts before rendering it unavailable for a 
+temporary period of time.
+- Static consumer authentication data should be changed periodically, 
+where possible – the strength and frequency with which the 
+authentication data is changed should be commensurate with business risk 
+and application vulnerability.
+- Dynamic consumer authentication data shall be subject to a 
+"time-to-live" (TTL) period and lifecycle management that includes 
+provisioning, binding and verification/validation. The TTL period 
+protects the authentication data from attacks such as replay. Any 
+attempts to verify such authentication data beyond the TTL shall fail.
+- Matching environment requirements – Jeff to provide further input. 
+Matching could potentially take place at client or server side.
+- Storage of cryptographic keys must occur in an HSM (Hardware Security 
+Module)
+- Secure consumer authentication SHALL provide audit information.
+- Successful completion or failure of an authentication event and/or 
+payment transaction must be traceable.
+- Peripheral Hardware Devices/Secure Cryptographic Devices (SCD) are 
+required to capture payment and/or authentication data at the point of 
+entry for internet payments. The devices small protect the data prior to 
+the data entering a less secure environment.  An acceptable form of 
+protecting the data is an ANSI/ISO approved encryption algorithm.  
+Pprotection refers to maintaining the secrecy of the authentication data 
+from unauthorized disclosure.
+- Personal owned SCD provides acceptable "environmental security levels" 
+where as a public device must provide UKPT (Unique Key Per Transact) to 
+increase the "device security levels".
+- Cleartext secret cryptographic keys utilized by a data protection 
+method shall be protected within an SCD.
+- Cryptographic operations utilizing a cryptographic key that must be 
+kept secret must execute within an SCD.
+- Peripheral Hardware Devices may be authenticated prior to authorizing 
+a payment.
+- Authentication data SHALL be encrypted and SHALL be transmitted 
+through a separate channel/session from the identification data so that 
+it is not possible to associate the card data with the authentication 
+data.
+- Protected data, such as knowledge factors, SHALL not be stored by the 
+software used on the consumer’s device. (e.g)
+- Secure consumer authentication SHALL provide audit information:
+   - Successful completion of an authentication event and payment 
+transaction SHALL be verifiable
+   - Failure of an authentication event or payment transaction SHALL be 
+traceable
+   - Device geolocation information (e.g., mobile tower, IP address, GPS 
+coordinates) should be captured for audit-ability when such information 
+is accessible.  Note that for some token devices (e.g., credit card, 
+access token), geolocation information may not be available
+- Consumer authentication based on PIN capture shall be through a PIN 
+Entry Device (PED) peripheral or Secure UI.
+
+
+
+- Secure UI/Graphical Passcode Entry Method
+- The consumer is presented with a graphical display at the time of 
+purchase to be used for entry of authentication data. The consumer 
+should have antivirus software for malware, etc. Numeric passcode, 
+string of digits … not related to credit/debit card.  Any kind of 
+financial service transaction that is NOT a debit/credit card 
+transaction.
+   - The authentication data captured by the graphical display shall use 
+an encryption key that is randomly generated each time it is presented 
+to the consumer to capture the data.
+   - The encryption key for the graphical display shall be used only for 
+the encryption of the authentication data.
+   - As required by RISK policy of the payment provider: The encryption 
+key should be replaced / rotated within the constraints of a maximum 
+duration (e.g. 24 hours) or maximum number of transactions (e.g. 1000) 
+which ever constraint first becomes applicable. While knowledge of any 
+previous transaction does not present itself as an attack vector to the 
+current transaction, a maximum duration or number of transactions 
+threshold is considered best practice. Additional implementation 
+considerations that are more restrictive than those above are allowed 
+based on internal risk assessments.
+   - The authentication data entry shall be without use of keyboard to 
+mitigate keyboard logging based attacks.
+   - Authentication Data Symbols shall be randomly located to mitigate 
+the risk that the symbol position can be predicted.
+   - The identification data (e.g. Account number, PAN) and the 
+authentication data symbols shall never appear on the screen at the same 
+time. If a screen capture is made, the malware only has access to a part 
+of the data needed for an authentication.
+   - The actual authentication data shall not route or pass through a 
+merchant provider’s web server or database.
+   - The authentication data entry and card data entry shall be done 
+using separate channels – for example, you can’t enter authentication 
+data and PAN on same web site/page. Card credential capture provider may 
+not be the same as the cardholder credential capture provider.
+   - To ensure segregation of authentication data and PAN data, the 
+authentication data and the PAN shall be transmitted in separate 
+sessions from the consumer’s browser and the merchant to the 
+authenticating vendor.
+   - Once the authenticating vendor receives the authentication data, it 
+shall be kept separate from card data and other sensitive data outside 
+of a SCD.
+   - The authentication data shall never be stored post-authentication – 
+for example, as set forth in the PCI-DSS 3.0 standard
+   - Transmission of authentication data from the browser shall be 
+encrypted using an ANSI/ISO approved encryption algorithm with a minimum 
+requirement as set forth by NIST 800-57/SP800-131.
+   - Each authentication display session shall follow appropriate key 
+management procedures in accordance with ANSI/ISO.
+   - Data transmission from the consumer’s browser to the authenticating 
+vendor shall be encrypted using TLS/SSL in accordance to data 
+transmission security standards.
+   - To enable mutual authentication, an Anti-Phishing solution shall be 
+embedded into the graphical display process and available for consumer 
+use.  The Anti-Phishing solution should let the consumer know that the 
+graphical display they are interacting with is a genuine display and not 
+a fraudulent display.
+
+- IVR passcode entries
+   - In event a PIN capture device, secure UI is not available an 
+out-of-bands a voice call prompting for a passcode at the time of 
+purchase is acceptible
+
+- Dynamic Password
+   - One-Time Passwords (OTP) - an authentication method that may be used 
+for internet payments.  The OTP may be issued and verified either by the 
+card issuer or payment provider. OTPs may be unique in some systems, or 
+random in others without a guarantee of uniqueness.
+
+
+- The online/web merchant SHOULD never ask the consumer to enter their 
+actual payment card information.
+   - Internet Redirect Method
+     - The consumer is redirected at the time of checkout to the 
+financial institution’s secure online banking web site where a one-time 
+use, pseudo payment card number is generated by the financial 
+institution for use in subsequent internet payments. The pseudo payment 
+card number should also have a minimum lifespan.
+     - Prior to an online debit transaction, the consumer is required to 
+register and agree to online banking through his/her financial 
+institution.
+     - The Merchant’s checkout page SHOULD redirect the consumer 
+seamlessly into the online banking platform of the consumer’s financial 
+institution.
+     - The consumer SHOULD be able to validate the financial institution 
+website
+     - The financial institution SHOULD authenticate the consumer and 
+then generate a one-time use pseudo payment card number for each online 
+purchase.
